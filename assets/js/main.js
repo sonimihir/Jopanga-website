@@ -36,10 +36,10 @@
 
 			// Images (in the format of 'url': 'alignment').
 			images: {
-				'images/bg-female-influencer1.jpeg': 'center',
-				'images/bg-male-creator2.jpg': 'center',
-				'images/bg-female-influencer3.jpeg': 'center',
-				'images/bg-male-creator4.jpg': 'center'
+				'images/1.jpg': 'center',
+				'images/2.jpg': 'center',
+				'images/3.jpg': 'center',
+				'images/4.jpg': 'center'
 			},
 
 			// Delay.
