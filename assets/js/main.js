@@ -128,25 +128,30 @@
 		};
 
 		$form.addEventListener('submit', function(event) {
-			event.preventDefault();
+		event.preventDefault();
 
-			const email = document.getElementById("email").value;
+		const email = document.getElementById("email").value.trim();
+		if (!email) return;
 
-			fetch("https://script.google.com/macros/s/AKfycbxWP7FUv84PwAjUiTqPEW3t0aNHN0OQzw6OW79dcfrSX_nlVYy3nKWovkyf-QqdI5EV/exec", {
-				method: "POST",
-				mode: "no-cors",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ email: email })
-			})
-			.then(() => {
-				$form.reset(); // Reset input field after success
-				$message._show("success", "Thank you! You'll be notified.");
-			})
-			.catch(error => {
-				console.error("Error:", error);
-				$message._show("failure", "Something went wrong. Please try again.");
-			});
+		fetch("https://script.google.com/macros/s/AKfycbzw5kuh4bNMWI-n0dz0JHzdKkvhJTzA1SevA_RUUzIucsYPOjXSRyjma9UZVvgRiX1DNQ/exec", {
+			method: "POST",
+			headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
+			body: new URLSearchParams({ email })
+		})
+		.then(res => {
+			if (!res.ok) throw new Error("Network response was not ok");
+			return res.json();
+		})
+		.then(() => {
+			$form.reset();
+			$message._show("success", "Thank you! You'll be notified.");
+		})
+		.catch(err => {
+			console.error("Error:", err);
+			$message._show("failure", "Something went wrong. Please try again.");
 		});
+		});
+
 	})();
 
 })();
